@@ -1,0 +1,20 @@
+POST http://127.0.0.1:8080/redis/test/set?key=hello&value=redis
+
+
+
+###
+POST http://127.0.0.1:8080/redis/test/set?key=user:1001:name&value=alice
+
+###
+POST http://127.0.0.1:8080/redis/test/set?key=user:1001:name&value=alicia
+
+
+
+###
+GET http://127.0.0.1:8080/redis/test/getlenth?key=user:1001:name
+###
+GET http://127.0.0.1:8080/redis/test/get?key=user:1001:name
+###
+GET http://127.0.0.1:8080/redis/test/hello
+
+###

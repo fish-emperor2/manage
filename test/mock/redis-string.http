@@ -1,0 +1,46 @@
+GET http://127.0.0.1:8080/redis/str/set?id=user:1001:name&name=Alice
+
+###
+GET http://127.0.0.1:8080/redis/str/update?id=user:1001:name&name=Alicia
+
+###
+GET http://127.0.0.1:8080/redis/str/getlength?id=user:1001:name
+
+###
+GET http://127.0.0.1:8080/redis/str/get?id=user:1001:name
+
+###
+GET http://127.0.0.1:8080/redis/str/delete?id=user:1001:name
+
+###
+
+GET http://127.0.0.1:8080/redis/str/get?id=1
+
+###
+
+POST http://127.0.0.1:8080/redis/str/add
+Content-Type: application/json
+
+{
+  "name": "余宣振",
+  "studentId": "4",
+  "gender": "男",
+  "phoneNumber": "13736647113"
+}
+
+###
+POST http://127.0.0.1:8080/redis/str/update
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "余宣振",
+  "studentId": "114514",
+  "gender": "男",
+  "phoneNumber": "13736647113"
+}
+
+###
+GET http://127.0.0.1:8080/redis/str/delete?id=18
+
+###

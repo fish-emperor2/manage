@@ -1,0 +1,13 @@
+### 模拟注册一个用户
+POST http://127.0.0.1:8080/student/add
+Content-Type: application/json
+
+{
+  "name": "余宣振",
+  "studentId": "1",
+  "gender": "男",
+  "phoneNumber": "13736647113"
+}
+
+###
+

@@ -1,0 +1,37 @@
+{
+  "name": "lesson5",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@tsparticles/vue3": "^3.0.1",
+    "axios": "^1.7.7",
+    "element-plus": "^2.8.1",
+    "js-cookie": "^3.0.5",
+    "pinia": "^2.1.7",
+    "tsparticles": "^3.7.1",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20.17.9",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/tsconfig": "^0.5.1",
+    "axios-mock-adapter": "^2.1.0",
+    "npm-run-all2": "^6.2.0",
+    "typescript": "~5.4.0",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.1.10"
+  }
+}

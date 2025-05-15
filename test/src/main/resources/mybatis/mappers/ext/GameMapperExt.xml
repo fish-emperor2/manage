@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zime.test.dao.mapper.GameMapper">
+    <select id="All" resultMap="BaseResultMap">
+    SELECT *
+    FROM games
+</select>
+
+    <select id="selectbyid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT *
+    FROM games
+    where id=#{id}
+</select>
+    <insert id="insertGame" parameterType="com.zime.test.dao.entity.Game">
+        INSERT INTO games (title, subtitle, brand, release_date, game_type, image_url, created_at, updated_at, heart, story_intro, tags)
+        VALUES (
+        #{title},
+        #{subtitle},
+        #{brand},
+        #{releaseDate},
+        #{gameType},
+        #{imageUrl},
+        #{createdAt},
+        #{updatedAt},
+        #{heart},
+        #{storyIntro},
+        JSON_ARRAY(<foreach collection="tags" item="tag" separator=","> #{tag} </foreach>)
+        )
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zime.test.dao.mapper.GameMapper">
+  <resultMap id="BaseResultMap" type="com.zime.test.dao.entity.Game">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="release_date" jdbcType="DATE" property="releaseDate" />
+    <result column="game_type" jdbcType="VARCHAR" property="gameType" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="heart" jdbcType="INTEGER" property="heart" />
+    <result column="story_intro" jdbcType="VARCHAR" property="storyIntro" />
+
+    <!-- 添加tags字段映射，使用typeHandler -->
+    <result column="tags" jdbcType="VARCHAR" property="tags" typeHandler="com.zime.test.dao.handler.JsonTypeHandler" />
+  </resultMap>
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zime.test.dao.entity.Game">
+    <result column="story_intro" jdbcType="LONGVARCHAR" property="storyIntro" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, subtitle, brand, release_date, game_type, image_url, created_at, updated_at, 
+    heart
+  </sql>
+  <sql id="Blob_Column_List">
+    story_intro
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from games
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from games
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zime.test.dao.entity.Game">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into games (title, subtitle, brand, 
+      release_date, game_type, image_url, 
+      created_at, updated_at, heart, 
+      story_intro)
+    values (#{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{releaseDate,jdbcType=DATE}, #{gameType,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{heart,jdbcType=INTEGER}, 
+      #{storyIntro,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zime.test.dao.entity.Game">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into games
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subtitle != null">
+        subtitle,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="releaseDate != null">
+        release_date,
+      </if>
+      <if test="gameType != null">
+        game_type,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="heart != null">
+        heart,
+      </if>
+      <if test="storyIntro != null">
+        story_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null">
+        #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="gameType != null">
+        #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="heart != null">
+        #{heart,jdbcType=INTEGER},
+      </if>
+      <if test="storyIntro != null">
+        #{storyIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zime.test.dao.entity.Game">
+    update games
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null">
+        release_date = #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="gameType != null">
+        game_type = #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="heart != null">
+        heart = #{heart,jdbcType=INTEGER},
+      </if>
+      <if test="storyIntro != null">
+        story_intro = #{storyIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tags != null and !tags.isEmpty()">
+        tags = JSON_ARRAY(<foreach collection="tags" item="tag" separator="," open="" close=""> #{tag} </foreach>)
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zime.test.dao.entity.Game">
+    update games
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=DATE},
+      game_type = #{gameType,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      heart = #{heart,jdbcType=INTEGER},
+      story_intro = #{storyIntro,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zime.test.dao.entity.Game">
+    update games
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=DATE},
+      game_type = #{gameType,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      heart = #{heart,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

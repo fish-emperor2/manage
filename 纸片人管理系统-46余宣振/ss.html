@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Diagram</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+
+<body>
+    <div class="mermaid">
+        graph TD;
+        A[用户注册/登录] --> B{验证用户信息}
+        B -->|成功| C[存储用户信息到Cookie]
+        B -->|失败| D[提示错误信息]
+        C --> E[用户主页]
+        E --> F[浏览游戏]
+        E --> G[发表评论]
+        E --> H[查看帖子]
+        C --> I[管理员主页]
+        I --> J[添加游戏]
+        I --> K[管理评论]
+        I --> L[管理帖子]
+    </div>
+    <div class="mermaid">
+        flowchart LR;
+        A[用户管理] --> B[注册]
+        A --> C[登录]
+        A --> D[用户信息修改]
+        A --> E[用户删除]
+        F[游戏管理] --> G[添加游戏]
+        F --> H[更新游戏]
+        F --> I[删除游戏]
+        F --> J[查看游戏详情]
+        K[评论管理] --> L[添加评论]
+        K --> M[查看评论]
+        K --> N[删除评论]
+
+        S[文件管理] --> T[上传图片]
+        S --> U[删除图片]
+    </div>
+</body>
+
+</html>
